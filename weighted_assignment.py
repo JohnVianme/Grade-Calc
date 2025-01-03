@@ -22,7 +22,11 @@ class weighted_assignment:
 
     def get_total_points(self):
         return self.total_points
-
+    
+    def calc_grade(self):
+        pass
+    def calc_asm(self):
+        pass
 
 asm1 = weighted_assignment("HW 1", 10, 90, 100)
 print(f"Name: {asm1.get_name()}")
