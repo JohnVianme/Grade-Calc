@@ -25,4 +25,7 @@ class weighted_assignment:
 
 
 asm1 = weighted_assignment("HW 1", 10, 90, 100)
-print(asm1.get_name())
+print(f"Name: {asm1.get_name()}")
+print(f"Weight: {asm1.get_weight()}%")
+print(f"Earned Points: {asm1.get_points_earned()}")
+print(f"Total Points: {asm1.get_total_points()}")
