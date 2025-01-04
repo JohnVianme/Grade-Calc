@@ -2,8 +2,6 @@
 Class representing a weighted_assignment object that has a name, weight, points earned and 
 total points. This clas can be used to creat an assignment that has a weight.
 """
-
-
 class weighted_assignment:
     def __init__(self, name, weight, points_earned, points_possible):
         self.name = name
