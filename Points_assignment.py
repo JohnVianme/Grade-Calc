@@ -1,4 +1,7 @@
-
+"""
+Class representing points_assignment object that has parameter name, points_earned, and points_total. This class can 
+be used to create an assignment that is graded based off of a point system
+"""
 
 
 
