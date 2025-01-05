@@ -23,10 +23,3 @@ class weighted_assignment:
 
     def calc_asm(self):
         return self.points_earned / self.points_possible * self.weight
-
-asm1 = weighted_assignment("HW 1", 10, 90, 100)
-print(f"Name: {asm1.get_name()}")
-print(f"Weight: {asm1.get_weight()}%")
-print(f"Points Earned: {asm1.get_points_earned()}")
-print(f"Points Possible: {asm1.get_points_possible()}")
-print(f"Score: {asm1.calc_asm()}")
