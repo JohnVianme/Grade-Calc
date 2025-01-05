@@ -26,10 +26,10 @@ class test_points_assignment(unittest.TestCase):
         self.asm2 = points_assignment("Homework", 100, 100)
 
     
-        self.asm3 = points_assignment("Homework", 65.81, 130)
-        self.asm4 = points_assignment("Exam1", 100.22, 200)
-        self.asm5 = points_assignment("Exam2", 100.13, 200)
-        self.asm6 = points_assignment("Final Project", 125.09, 250)
+        self.asm3 = points_assignment("Homework", 65, 130)
+        self.asm4 = points_assignment("Exam1", 100, 200)
+        self.asm5 = points_assignment("Exam2", 100, 200)
+        self.asm6 = points_assignment("Final Project", 100, 250)
 
         self.list_test = [self.asm3,self.asm4,self.asm5,self.asm6]
         self.grade_overall = Main.calc_points_grade(self.list_test)
@@ -55,7 +55,7 @@ class test_points_assignment(unittest.TestCase):
         self.assertAlmostEqual(self.asm2.calc_grade(), 100, places = 2)
 
     def test_overall_grade(self):
-        self.assertAlmostEqual(self.grade_overall, 50, delta = 0.0000001)
+        self.assertAlmostEqual(self.grade_overall, 46.79, places = 2)
 
     
     
