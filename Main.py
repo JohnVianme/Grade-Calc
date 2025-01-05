@@ -27,8 +27,3 @@ def calc_points_grade (list_of_points_asms: List[points_assignment]):
     
     score = (tot_points_earned / tot_points_total) * 100
     return score
-
-
-print("Hello World")
-print("Test")
-print("By World")
