@@ -33,8 +33,11 @@ def calc_points_grade(list_of_points_asms: List[points_assignment]):
     return score
 
 
-def add_assignment_points(list_of_asm, name, points_earned, points_total):  # Man
-    pass
+def add_assignment_points(list_of_asm: List, name, points_earned, points_total):  # Man
+    asm = points_assignment(name, points_earned, points_total)
+    list_of_asm.append(asm)
+    print("Added Successfully")
+    return True
 
 
 def add_assignment_weighted(
@@ -47,8 +50,13 @@ def add_assignment_weighted(
     return True
 
 
-def remove_assignment(list_of_asm, name):  # Man
-    pass
+def remove_assignment(list_of_asm: List, name):  # Man
+    for asm in list_of_asm:
+        if(asm.get_name() == name):
+            list_of_asm.remove(asm)
+            return True
+    print("Assignment not found.")
+    return False
 
 
 def display_assignment(asm_type, list_of_asm: List):  # John
@@ -70,8 +78,15 @@ def display_assignment(asm_type, list_of_asm: List):  # John
     print("############################################")
 
 
-def overall_grade_assignment(list_of_asm):  # Man
-    pass
+def overall_grade_assignment(list_of_asm: List, asm_type):  # Man
+    if (asm_type == 'W'):
+        print(f"{calc_weighted_grade(list_of_asm): .2f}%")
+        return True
+    elif (asm_type == 'P'):
+        print(f"{calc_points_grade(list_of_asm): .2f}%")
+        return True
+    else:
+        return False
 
 
 asm_type = input("Select type of Assignmet:\nW-Weighted\nP-Points\n").upper()
@@ -92,16 +107,30 @@ while True:
                 list_of_asm, name, weight, points_earned, points_total
             )
         elif asm_type == "P":
-            add_assignment_points(list_of_asm)
+            name = input("What is the name of the assignment: ")
+            points_earned = float(input("What is the points earned in this assignment: "))
+            points_total = float(input("What is the total points for this assignment: "))
+            add_assignment_points(list_of_asm, name, points_earned, points_total)
 
         print("Added element")
     elif command_ == "R":
-        print("Removed element")
+
+        name = input("Write the name of the assignment that you would like to remove: ")
+        is_remove = remove_assignment(list_of_asm, name)
+        print("Removed successfully")
+        if (is_remove == False):
+            print("Incorrect name, try again")
+        #print("Remove element")
+
+        
+
 
     elif command_ == "D":
         display_assignment(asm_type, list_of_asm)
 
     elif command_ == "O":
+        print("Calculating overall grade...")
+        overall_grade_assignment(list_of_asm, asm_type)
         print("Overall Grade")
     elif command_ == "Q":
         print("Exiting...")
