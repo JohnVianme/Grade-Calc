@@ -32,24 +32,37 @@ def calc_points_grade(list_of_points_asms: List[points_assignment]):
     score = (tot_points_earned / tot_points_total) * 100
     return score
 
+
 def add_assignment_points(list_of_asm, name, points_earned, points_total):  # Man
     pass
 
 
 def add_assignment_weighted(
-    list_of_asm, name, weight, points_earned, points_total
+    list_of_asm: List, name, weight, points_earned, points_total
 ):  # John
-    pass
+    an_asm = weighted_assignment(
+        name, float(weight), float(points_earned), float(points_total)
+    )
+    list_of_asm.append(an_asm)
+    return True
 
 
 def remove_assignment(list_of_asm, name):  # Man
     pass
 
 
-def display_assignment(list_of_asm):  # John
-    pass
-
-
+def display_assignment(asm_type, list_of_asm: List):  # John
+    for asm in list_of_asm:
+        print(asm.get_name())
+        if asm_type == 'w':
+            print(asm.get_weight())
+            print(asm.get_points_earned())
+            print(asm.points_possible())
+            print(asm.calc_asm())
+        else:
+            print(asm.get_points_earned())
+            print(asm.points_possible())
+            print(asm.calc_asm())
 
 def overall_grade_assignment(list_of_asm):  # Man
     pass
@@ -63,7 +76,13 @@ while True:
 
     if command_ == "A":
         if asm_type == "W":
-            add_assignment_weighted(list_of_asm)
+            name = input("Enter the Name: ")
+            weight = input("Enter the Weight: ")
+            points_earned = input("Enter the points earned: ")
+            points_total = input("Enter the points out of: ")
+            add_assignment_weighted(
+                list_of_asm, name, weight, points_earned, points_total
+            )
         elif asm_type == "P":
             add_assignment_points(list_of_asm)
 
