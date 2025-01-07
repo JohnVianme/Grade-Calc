@@ -52,7 +52,7 @@ def add_assignment_weighted(
 
 def remove_assignment(list_of_asm: List, name):  # Man
     for asm in list_of_asm:
-        if(asm.get_name() == name):
+        if asm.get_name() == name:
             list_of_asm.remove(asm)
             return True
     print("Assignment not found.")
@@ -83,10 +83,10 @@ def display_assignment(asm_type, list_of_asm: List):  # John
 
 
 def overall_grade_assignment(list_of_asm: List, asm_type):  # Man
-    if (asm_type == 'W'):
+    if asm_type == "W":
         print(f"{calc_weighted_grade(list_of_asm): .2f}%")
         return True
-    elif (asm_type == 'P'):
+    elif asm_type == "P":
         print(f"{calc_points_grade(list_of_asm): .2f}%")
         return True
     else:
@@ -112,8 +112,12 @@ while True:
             )
         elif asm_type == "P":
             name = input("What is the name of the assignment: ")
-            points_earned = float(input("What is the points earned in this assignment: "))
-            points_total = float(input("What is the total points for this assignment: "))
+            points_earned = float(
+                input("What is the points earned in this assignment: ")
+            )
+            points_total = float(
+                input("What is the total points for this assignment: ")
+            )
             add_assignment_points(list_of_asm, name, points_earned, points_total)
 
         print("Added element")
@@ -122,12 +126,9 @@ while True:
         name = input("Write the name of the assignment that you would like to remove: ")
         is_remove = remove_assignment(list_of_asm, name)
         print("Removed successfully")
-        if (is_remove == False):
+        if is_remove == False:
             print("Incorrect name, try again")
-        #print("Remove element")
-
-        
-
+        # print("Remove element")
 
     elif command_ == "D":
         display_assignment(asm_type, list_of_asm)
