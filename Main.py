@@ -52,46 +52,54 @@ def remove_assignment(list_of_asm, name):  # Man
 
 
 def display_assignment(asm_type, list_of_asm: List):  # John
+    print("############################################")
     for asm in list_of_asm:
-        print(asm.get_name())
-        if asm_type == 'w':
-            print(asm.get_weight())
-            print(asm.get_points_earned())
-            print(asm.points_possible())
-            print(asm.calc_asm())
+        print("Name: " + str(asm.get_name()) + "\n")
+        if asm_type.lower() == "w":
+            print("Weight: " + str(asm.get_weight()) + "\n")
+            print("Points Earned: " + str(asm.get_points_earned()) + "\n")
+            print("Points Possible: " + str(asm.get_points_possible()) + "\n")
+            print("Asm Grade: " + str(asm.calc_asm()) + "%")
+            print("Asm Weight Grade: " + str(asm.calc_weight_grade()))
+
         else:
-            print(asm.get_points_earned())
-            print(asm.points_possible())
-            print(asm.calc_asm())
+            print("Points Earned: " + str(asm.get_points_earned()) + "\n")
+            print("Points Possible: " + str(asm.get_points_total()) + "\n")
+            print("Grade: " + str(asm.calc_grade()))
+        print("----------------------------")
+    print("############################################")
+
 
 def overall_grade_assignment(list_of_asm):  # Man
     pass
 
 
-asm_type = input("W-Weighted\nP-Points\n")
+asm_type = input("Select type of Assignmet:\nW-Weighted\nP-Points\n").upper()
 list_of_asm = []
 
 while True:
-    command_ = input("Q-Quit\nD-Display\nO-Overall Grade\nA-Add assignment\nR-Remove\n")
+    command_ = input(
+        "Enter Command:\nQ-Quit\nD-Display\nO-Overall Grade\nA-Add assignment\nR-Remove\n"
+    ).upper()
 
     if command_ == "A":
         if asm_type == "W":
             name = input("Enter the Name: ")
             weight = input("Enter the Weight: ")
             points_earned = input("Enter the points earned: ")
-            points_total = input("Enter the points out of: ")
+            points_total = input("Enter the points earned: ")
             add_assignment_weighted(
                 list_of_asm, name, weight, points_earned, points_total
             )
         elif asm_type == "P":
             add_assignment_points(list_of_asm)
 
-        print("Add element")
+        print("Added element")
     elif command_ == "R":
-        print("Remove element")
+        print("Removed element")
 
     elif command_ == "D":
-        print("Display")
+        display_assignment(asm_type, list_of_asm)
 
     elif command_ == "O":
         print("Overall Grade")
@@ -99,4 +107,4 @@ while True:
         print("Exiting...")
         exit()
     else:
-        command_ = input("Unknown command, try again\n")
+        print("Unknown command, try again\n")

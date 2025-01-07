@@ -22,4 +22,7 @@ class weighted_assignment:
         return self.points_possible
 
     def calc_asm(self):
+        return self.points_earned / self.points_possible * 100
+    
+    def calc_weight_grade(self):
         return self.points_earned / self.points_possible * self.weight
