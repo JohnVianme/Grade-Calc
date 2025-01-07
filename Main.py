@@ -61,10 +61,10 @@ def display_assignment(list_of_asm):  # John
 
 def overall_grade_assignment(list_of_asm: List, asm_type):  # Man
     if (asm_type == 'W'):
-        calc_weighted_grade(list_of_asm)
+        print(f"{calc_weighted_grade(list_of_asm): .2f}%")
         return True
     elif (asm_type == 'P'):
-        calc_points_grade(list_of_asm)
+        print(f"{calc_points_grade(list_of_asm): .2f}%")
         return True
     else:
         return False
@@ -89,6 +89,7 @@ while True:
     elif command_ == "R":
         name = input("Write the name of the assignment that you would like to remove: ")
         is_remove = remove_assignment(list_of_asm, name)
+        print("Removed successfully")
         if (is_remove == False):
             print("Incorrect name, try again")
         #print("Remove element")
