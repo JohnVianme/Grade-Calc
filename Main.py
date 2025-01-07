@@ -32,7 +32,6 @@ def calc_points_grade(list_of_points_asms: List[points_assignment]):
     score = (tot_points_earned / tot_points_total) * 100
     return score
 
-
 def add_assignment_points(list_of_asm, name, points_earned, points_total):  # Man
     pass
 
@@ -49,6 +48,7 @@ def remove_assignment(list_of_asm, name):  # Man
 
 def display_assignment(list_of_asm):  # John
     pass
+
 
 
 def overall_grade_assignment(list_of_asm):  # Man
