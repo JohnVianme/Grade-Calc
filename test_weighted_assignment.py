@@ -1,3 +1,4 @@
+# Authors: 
 from typing import List
 import unittest
 from weighted_assignment import weighted_assignment
@@ -66,7 +67,6 @@ class test_weighted_assignment(unittest.TestCase):
         self.assertAlmostEqual(
             Main.calc_weighted_grade(self.asms), expected, delta=1e-5
         )
-
 
 if __name__ == "__main__":
     unittest.main()
