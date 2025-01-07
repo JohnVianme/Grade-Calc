@@ -91,25 +91,25 @@ def overall_grade_assignment(list_of_asm: List, asm_type):  # Man
         return True
     else:
         return False
-    
+
+
 def check_input(value, error_message):
-    while (True):
+    while True:
         try:
             value = float(value)
             return value
 
         except ValueError:
             value = input("Invalid input. " + error_message + "\n")
-    
 
 
 asm_type = input("Select type of Assignmet:\nW-Weighted\nP-Points\n").upper()
 list_of_asm = []
 
-while (True):   #Checks if assignment type is valid
-    if (asm_type == 'P'):
+while True:  # Checks if assignment type is valid
+    if asm_type == "P":
         break
-    elif (asm_type == 'W'):
+    elif asm_type == "W":
         break
     else:
         print("Invalid assignment type, try again")
@@ -125,29 +125,39 @@ while True:
         if asm_type == "W":
             name = input("Enter the Name: ")
 
-            weight = check_input(input("Enter the Weight: "), "Please enter a valid weight")
-            points_earned = check_input(input("Enter the points earned: "), "Please enter a valid point that was earned")
-            points_total = check_input(input("Enter the points possible: "), "Please enter a valid total point")
-
-
+            weight = check_input(
+                input("Enter the Weight: "), "Please enter a valid weight"
+            )
+            points_earned = check_input(
+                input("Enter the points earned: "),
+                "Please enter a valid point that was earned",
+            )
+            points_total = check_input(
+                input("Enter the points possible: "), "Please enter a valid total point"
+            )
 
             add_assignment_weighted(
                 list_of_asm, name, weight, points_earned, points_total
             )
         elif asm_type == "P":
             name = input("What is the name of the assignment: ")
-            points_earned = check_input(input("What is the points earned in this assignment: "), "Please enter a valid point that was earned")
-            points_total = check_input(input("What is the total points for this assignment: "),"Please enter a valid total point")
+            points_earned = check_input(
+                input("What is the points earned in this assignment: "),
+                "Please enter a valid point that was earned",
+            )
+            points_total = check_input(
+                input("What is the total points for this assignment: "),
+                "Please enter a valid total point",
+            )
             add_assignment_points(list_of_asm, name, points_earned, points_total)
 
-        
     elif command_ == "R":
 
         name = input("Write the name of the assignment that you would like to remove: ")
         is_remove = remove_assignment(list_of_asm, name)
-        if (is_remove == True):
+        if is_remove == True:
             print("Removed successfully")
-        elif (is_remove == False):
+        elif is_remove == False:
             print("Incorrect name, try again")
         # print("Remove element")
 
