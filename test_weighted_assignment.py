@@ -1,3 +1,4 @@
+# Authors: 
 from typing import List
 import unittest
 from weighted_assignment import weighted_assignment
