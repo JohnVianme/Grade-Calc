@@ -26,12 +26,12 @@ class points_assignment:
 
 
 asm2 = points_assignment("Final Exam", 140, 200)
+'''
 print(f"Name: {asm2.get_name()}")
 print(f"Points earned: {asm2.get_points_earned()}")
 print(f"Points total: {asm2.get_points_total()}")
 print(f"Total grade: {asm2.calc_grade()}%")
-
-
+'''
 
 
 
