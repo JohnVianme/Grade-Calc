@@ -11,7 +11,7 @@ the list of assignmets.
 def calc_weighted_grade(list_of_weighted_asms: List[weighted_assignment]):
     score = 0
     for asm in list_of_weighted_asms:
-        score += asm.calc_asm()
+        score += asm.calc_weight_grade()
     return score
 
 
@@ -69,12 +69,16 @@ def display_assignment(asm_type, list_of_asm: List):  # John
             print("Points Possible: " + str(asm.get_points_possible()) + "\n")
             print("Asm Grade: " + str(asm.calc_asm()) + "%")
             print("Asm Weight Grade: " + str(asm.calc_weight_grade()))
-
         else:
             print("Points Earned: " + str(asm.get_points_earned()) + "\n")
             print("Points Possible: " + str(asm.get_points_total()) + "\n")
             print("Grade: " + str(asm.calc_grade()))
         print("----------------------------")
+    if asm_type.lower() == "w":
+        print("{Final Grade Overall: " + str(calc_weighted_grade(list_of_asm)) + " }")
+    else:
+        print("{Final Grade Overall: " + str(calc_points_grade(list_of_asm)) + " }")
+
     print("############################################")
 
 
