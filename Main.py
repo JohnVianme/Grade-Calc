@@ -32,18 +32,42 @@ def calc_points_grade(list_of_points_asms: List[points_assignment]):
     score = (tot_points_earned / tot_points_total) * 100
     return score
 
+def add_assignment_points(list_of_asm, name, points_earned, points_total):  # Man
+    pass
 
-# def add_assignment ()
+
+def add_assignment_weighted(
+    list_of_asm, name, weight, points_earned, points_total
+):  # John
+    pass
+
+
+def remove_assignment(list_of_asm, name):  # Man
+    pass
+
+
+def display_assignment(list_of_asm):  # John
+    pass
+
+
+
+def overall_grade_assignment(list_of_asm):  # Man
+    pass
+
 
 asm_type = input("W-Weighted\nP-Points\n")
-
+list_of_asm = []
 
 while True:
     command_ = input("Q-Quit\nD-Display\nO-Overall Grade\nA-Add assignment\nR-Remove\n")
 
     if command_ == "A":
-        print("Add element")
+        if asm_type == "W":
+            add_assignment_weighted(list_of_asm)
+        elif asm_type == "P":
+            add_assignment_points(list_of_asm)
 
+        print("Add element")
     elif command_ == "R":
         print("Remove element")
 
