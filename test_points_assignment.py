@@ -57,13 +57,6 @@ class test_points_assignment(unittest.TestCase):
     def test_overall_grade(self):
         self.assertAlmostEqual(self.grade_overall, 46.79, places = 2)
 
-    
-    
-    
-
-        
-
-
 
 if __name__ == '__main__':
     unittest.main()
