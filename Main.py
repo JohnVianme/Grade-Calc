@@ -87,7 +87,7 @@ while True:
             name = input("Enter the Name: ")
             weight = input("Enter the Weight: ")
             points_earned = input("Enter the points earned: ")
-            points_total = input("Enter the points earned: ")
+            points_total = input("Enter the points possible: ")
             add_assignment_weighted(
                 list_of_asm, name, weight, points_earned, points_total
             )
