@@ -7,4 +7,4 @@ def window():
     app = QApplication(sys.argv)
     win = QMainWindow()
     win.setGeometry(200, 200 ,300, 300)
-    win.setWindow
+    
