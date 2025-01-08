@@ -47,6 +47,16 @@ def add_assignment_weighted(
         name, float(weight), float(points_earned), float(points_total)
     )
     list_of_asm.append(an_asm)
+    counter = 0
+    for asm in list_of_asm:
+        counter += asm.get_weight()
+    
+    
+    if (counter > 100):
+        print("-------------------------------------------------------")
+        print("\nWarning: Weight exceeds 100")
+        print(f"Current weight: {counter}\n")
+        print("-------------------------------------------------------")
     return True
 
 
@@ -148,8 +158,6 @@ while True:
         #print("Remove element")
 
         
-
-
     elif command_ == "D":
         display_assignment(asm_type, list_of_asm)
 
