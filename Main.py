@@ -159,7 +159,6 @@ while True:
             print("Removed successfully")
         elif is_remove == False:
             print("Incorrect name, try again")
-        # print("Remove element")
 
     elif command_ == "D":
         display_assignment(asm_type, list_of_asm)
