@@ -47,12 +47,22 @@ def add_assignment_weighted(
         name, float(weight), float(points_earned), float(points_total)
     )
     list_of_asm.append(an_asm)
+    counter = 0
+    for asm in list_of_asm:
+        counter += asm.get_weight()
+    
+    
+    if (counter > 100):
+        print("-------------------------------------------------------")
+        print("\nWarning: Weight exceeds 100")
+        print(f"Current weight: {counter}\n")
+        print("-------------------------------------------------------")
     return True
 
 
 def remove_assignment(list_of_asm: List, name):  # Man
     for asm in list_of_asm:
-        if asm.get_name() == name:
+        if(asm.get_name() == name):
             list_of_asm.remove(asm)
             return True
     print("Assignment not found.")
@@ -69,24 +79,20 @@ def display_assignment(asm_type, list_of_asm: List):  # John
             print("Points Possible: " + str(asm.get_points_possible()) + "\n")
             print("Asm Grade: " + str(asm.calc_asm()) + "%")
             print("Asm Weight Grade: " + str(asm.calc_weight_grade()))
+
         else:
             print("Points Earned: " + str(asm.get_points_earned()) + "\n")
             print("Points Possible: " + str(asm.get_points_total()) + "\n")
             print("Grade: " + str(asm.calc_grade()))
         print("----------------------------")
-    if asm_type.lower() == "w":
-        print("{Final Grade Overall: " + str(calc_weighted_grade(list_of_asm)) + " }")
-    else:
-        print("{Final Grade Overall: " + str(calc_points_grade(list_of_asm)) + " }")
-
     print("############################################")
 
 
 def overall_grade_assignment(list_of_asm: List, asm_type):  # Man
-    if asm_type == "W":
+    if (asm_type == 'W'):
         print(f"{calc_weighted_grade(list_of_asm): .2f}%")
         return True
-    elif asm_type == "P":
+    elif (asm_type == 'P'):
         print(f"{calc_points_grade(list_of_asm): .2f}%")
         return True
     else:
@@ -149,8 +155,9 @@ while True:
             print("Removed successfully")
         elif (is_remove == False):
             print("Incorrect name, try again")
-        # print("Remove element")
+        #print("Remove element")
 
+        
     elif command_ == "D":
         display_assignment(asm_type, list_of_asm)
 
