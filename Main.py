@@ -54,7 +54,7 @@ def add_assignment_weighted(
     
     if (counter > 100):
         print("-------------------------------------------------------")
-        print("\nWarning: Weight exceeds 100")
+        print("\nWARNING: Weight exceeds 100")
         print(f"Current weight: {counter}\n")
         print("-------------------------------------------------------")
     return True
