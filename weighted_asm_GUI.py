@@ -140,8 +140,7 @@ class Ui_MainWindow(object):
         self.tableWidget.clearFocus()
         self.scrollArea.viewport().clearFocus()
         self.tableWidget.setFocus()
-        # commit changes not finished
-
+        
 if __name__ == "__main__":
     import sys
 
