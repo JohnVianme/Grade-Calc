@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -77,7 +77,11 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Points Total"))
         self.calc_grade_button.setText(_translate("MainWindow", "Calculate Grade"))
-
+    """
+    This fuction prints each column and row in the table of asm
+    """
+    def print_Item(self):
+        pass
 
 if __name__ == "__main__":
     import sys
