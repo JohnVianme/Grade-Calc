@@ -59,6 +59,11 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        # allow printing of colums and rows
+        self.tableWidget.cellChanged.connect(self.print_table)
+        #self.print_table()
+
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -77,14 +82,42 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Points Total"))
         self.calc_grade_button.setText(_translate("MainWindow", "Calculate Grade"))
+
     """
     This fuction prints each column and row in the table of asm
     """
-    def print_Item(self):
-        pass
+
+    def print_item(self):
+        print(self.get_item_at(0, 0))
+
+    """
+    This function returns the contents of the value at x, y (row,col) from the 
+    tableWidget.
+    """
+
+    def get_item_at(self, x, y):
+        if (self.tableWidget.itemAt(x, y)):
+            return self.tableWidget.itemAt(x, y).text()
+        return "Empty"
+    """
+    This function prints out all the rows and columns of the table of 
+    assignments
+    """
+    def print_table(self):
+        rows = self.tableWidget.rowCount()
+        cols = self.tableWidget.colorCount()
+        print(rows)
+        print(cols)
+
+        for row in range(rows):
+            for col in range(cols):
+                item = self.get_item_at(row, col)
+                print(item)
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
