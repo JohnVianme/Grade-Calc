@@ -102,6 +102,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.tableWidget.cellChanged.connect(self.cell_access)
+        self.tableWidget.setItem(2,1, QtWidgets.QTableWidgetItem("100"))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
