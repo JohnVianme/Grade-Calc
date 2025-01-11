@@ -123,11 +123,23 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addAction(self.actionSave_2)
         self.menuBar.addAction(self.menuFile.menuAction())
+        
+        self.delete_row = QtWidgets.QPushButton(self.splitter)
+        self.delete_row.setObjectName("deleteColumn")
+        
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.addColumn.clicked.connect(self.added_column)
+        self.delete_row.clicked.connect(self.deleted_row)
+
+
+
+
+        #self.tableWidget.cellClicked.connect(self.get_row)
+      
+        
 
         #self.tableWidget.cellChanged.connect(self.cell_access) #sets up a way to get user data 
         #self.tableWidget.setItem(2,1, QtWidgets.QTableWidgetItem("100")) #sets up a way to output data to GUI
@@ -143,6 +155,10 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Points Total"))
         self.addColumn.setText(_translate("MainWindow", "Add Column"))
+        self.delete_row.setText(_translate("MainWindow", "Delete Column"))
+        
+        
+
         self.label.setText(_translate("MainWindow", "Overall Grade"))
         self.pushButton_2.setText(_translate("MainWindow", "Click to calculate"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
@@ -156,6 +172,14 @@ class Ui_MainWindow(object):
         self.actionSave_2.setText(_translate("MainWindow", "Save"))
         self.actionSave_2.setStatusTip(_translate("MainWindow", "Save a file"))
         self.actionSave_2.setShortcut(_translate("MainWindow", "Ctrl+S"))
+
+    def get_row(self,row,column):
+        cell_content = self.tableWidget.item(row,column)
+        
+        if cell_content:
+            print(f"Content on cell: {cell_content.text()}")
+
+
     
     def cell_access(self):
         cell_content = self.tableWidget.item(2,2)
@@ -165,7 +189,17 @@ class Ui_MainWindow(object):
     def added_column(self):
         rowPosition = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowPosition)
-        self.tableWidget.resizeRowsToContents()
+
+    def deleted_row(self):
+        rowPosition = self.tableWidget.rowCount() - 1
+        self.tableWidget.removeRow(rowPosition)
+        
+
+
+
+        
+        
+        #self.tableWidget.resizeRowsToContents()
 
         
         
