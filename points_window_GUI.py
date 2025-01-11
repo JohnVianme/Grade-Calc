@@ -22,9 +22,6 @@ def window():
 
 window()
 """
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -35,7 +32,14 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(190, 90, 641, 311))
+        self.tableWidget.setEnabled(True)
+        self.tableWidget.setGeometry(QtCore.QRect(290, 40, 461, 471))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy)
+        self.tableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(4)
@@ -65,6 +69,9 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         item.setFont(font)
         self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(151)
+        self.tableWidget.horizontalHeader().setMinimumSectionSize(50)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(40)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -91,12 +98,10 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionSave_2)
         self.menuBar.addAction(self.menuFile.menuAction())
 
-
-
-        
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.tableWidget.cellChanged.connect(self.cell_access)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -118,7 +123,11 @@ class Ui_MainWindow(object):
         self.actionSave_2.setText(_translate("MainWindow", "Save"))
         self.actionSave_2.setStatusTip(_translate("MainWindow", "Save a file"))
         self.actionSave_2.setShortcut(_translate("MainWindow", "Ctrl+S"))
-
+    
+    def cell_access(self):
+        cell_content = self.tableWidget.item(2,2)
+        if cell_content:
+            print(f"Content on cell: {cell_content.text()}")
 
         
 
@@ -129,5 +138,18 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+    
+
+            
+    MainWindow.show()       
+    sys.exit(app.exec_()) 
+        
+           
+        
+
+
+    
+    
+    
+
+    
