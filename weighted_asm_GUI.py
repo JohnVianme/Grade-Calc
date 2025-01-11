@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QTimer
 
 
 class Ui_MainWindow(object):
@@ -41,6 +42,11 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
+        # all rows start with zero as the value
+        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("0"))
         self.tableWidget.setHorizontalHeaderItem(3, item)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(150)
@@ -58,21 +64,20 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
-        # allow printing of colums and rows
-        self.tableWidget.cellChanged.connect(self.print_table)
-        #self.print_table()
-
-
         self.retranslateUi(MainWindow)
+
+        # When add assignment buttons is pressed, print table
+        self.Add_Asm_Button.clicked.connect(self.add_row_to_table)
+        self.calc_grade_button.clicked.connect(self.print_table)
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Add_Asm_Button.setText(_translate("MainWindow", "PushButton"))
+        self.Add_Asm_Button.setText(_translate("MainWindow", "Add Assignment"))
         item = self.tableWidget.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "HW 1"))
+        item.setText(_translate("MainWindow", "1"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Name"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -82,6 +87,16 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Points Total"))
         self.calc_grade_button.setText(_translate("MainWindow", "Calculate Grade"))
+
+    def add_row_to_table(self):
+        rowCount = self.tableWidget.rowCount()
+        self.tableWidget.insertRow(rowCount)
+        self.tableWidget.setItem(rowCount, 0, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(rowCount, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(rowCount, 2, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(rowCount, 3, QtWidgets.QTableWidgetItem("0"))
+        # set focus back on table
+        self.tableWidget.setFocus()
 
     """
     This fuction prints each column and row in the table of asm
@@ -96,24 +111,36 @@ class Ui_MainWindow(object):
     """
 
     def get_item_at(self, x, y):
-        if (self.tableWidget.itemAt(x, y)):
-            return self.tableWidget.itemAt(x, y).text()
-        return "Empty"
+        return self.tableWidget.item(x, y)
+
     """
     This function prints out all the rows and columns of the table of 
     assignments
     """
+
     def print_table(self):
+        self.deselect_table()
         rows = self.tableWidget.rowCount()
-        cols = self.tableWidget.colorCount()
-        print(rows)
-        print(cols)
-
+        cols = self.tableWidget.columnCount()
         for row in range(rows):
+            aRow = ""
             for col in range(cols):
-                item = self.get_item_at(row, col)
-                print(item)
+                not_empty_item = self.get_item_at(row, col)
+                if not_empty_item:
+                    aRow += not_empty_item.text() + " "
+            print(aRow)
 
+    """
+    This function makes it so the table is updated and not selected so other
+    method using the method have the most up to date table.
+    """
+
+    def deselect_table(self):
+        self.tableWidget.viewport().update()
+        self.tableWidget.clearFocus()
+        self.scrollArea.viewport().clearFocus()
+        self.tableWidget.setFocus()
+        # commit changes not finished
 
 if __name__ == "__main__":
     import sys
