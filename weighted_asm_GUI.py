@@ -61,24 +61,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def setLightTheme(self):
-        # Set a Fusion style
-        QtWidgets.QApplication.setStyle("Fusion")
-
-        # Create a light palette
-        light_palette = QtGui.QPalette()
-        light_palette.setColor(QtGui.QPalette.Window, QtGui.QColor(255, 255, 255))  # Background color
-        light_palette.setColor(QtGui.QPalette.WindowText, QtGui.QColor(0, 0, 0))    # Text color
-        light_palette.setColor(QtGui.QPalette.Base, QtGui.QColor(255, 255, 255))    # Input fields
-        light_palette.setColor(QtGui.QPalette.Text, QtGui.QColor(0, 0, 0))          # Text in input fields
-        light_palette.setColor(QtGui.QPalette.Button, QtGui.QColor(240, 240, 240))  # Button color
-        light_palette.setColor(QtGui.QPalette.ButtonText, QtGui.QColor(0, 0, 0))    # Button text color
-        light_palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(0, 120, 215)) # Highlight color
-        light_palette.setColor(QtGui.QPalette.HighlightedText, QtGui.QColor(255, 255, 255)) # Highlighted text
-
-        # Apply the palette to the application
-        QtWidgets.QApplication.setPalette(light_palette)
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
