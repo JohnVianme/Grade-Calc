@@ -218,13 +218,9 @@ class Ui_MainWindow(object):
             points_total = points_total + int(cell_content_total.text())
         
         overall = (points_earned / points_total) * 100
+        overall = round(overall,2)
 
-        print(f"Overall Grade: {overall: .2f}%")
-            
-
-        
-        
-
+        self.lcdNumber.display(overall)
 
 
         
@@ -287,7 +283,7 @@ if __name__ == "__main__":
             return False
     
     import sys
-    asm_type = input("W or P\n")
+    #asm_type = input("W or P\n")
 
     
     app = QtWidgets.QApplication(sys.argv)
