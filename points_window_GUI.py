@@ -29,13 +29,13 @@ from weighted_assignment import weighted_assignment
 from Points_assignment import points_assignment
 
 
-list_of_asm = []
+
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1023, 562)
+        MainWindow.resize(1023, 562) #1023
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -187,8 +187,8 @@ class Ui_MainWindow(object):
         cell_content = self.tableWidget.item(row,column)
         
         if cell_content:
-            #print(f"Content on cell: {cell_content.text()}")
-            print(f"({row}, {column}) is currently selected")
+            print(f"Content on cell: {cell_content.text()}")
+            #print(f"({row}, {column}) is currently selected")
 
 
     """
@@ -202,10 +202,13 @@ class Ui_MainWindow(object):
     def added_column(self):
         rowPosition = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowPosition)
+        self.tableWidget.setItem(rowPosition, 1, QtWidgets.QTableWidgetItem("0"))
+        self.tableWidget.setItem(rowPosition, 2, QtWidgets.QTableWidgetItem("0"))
 
     def deleted_row(self):
         rowPosition = self.tableWidget.rowCount() - 1
         self.tableWidget.removeRow(rowPosition)
+
 
     def calculate_overall_grade(self):
         points_earned = 0
@@ -214,21 +217,18 @@ class Ui_MainWindow(object):
             cell_content_earned = self.tableWidget.item(x,1)
             cell_content_total = self.tableWidget.item(x,2)
 
-            points_earned = points_earned + int(cell_content_earned.text())
-            points_total = points_total + int(cell_content_total.text())
+            if ((len(cell_content_earned.text()) > 0) and (len(cell_content_total.text()) > 0)):
+                points_earned = points_earned + float(cell_content_earned.text())
+                points_total = points_total + float(cell_content_total.text())   
+
+
+  
+                
         
         overall = (points_earned / points_total) * 100
         overall = round(overall,2)
 
         self.lcdNumber.display(overall)
-
-
-        
-        
-        #self.tableWidget.resizeRowsToContents()
-
-        
-        
 
 
         
