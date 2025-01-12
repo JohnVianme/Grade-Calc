@@ -181,6 +181,7 @@ class Ui_MainWindow(object):
     """
 
     def show_final_grade(self, final_grade):
+        
         print(final_grade)
 
     def add_assignment_weighted(
