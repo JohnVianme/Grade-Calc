@@ -66,9 +66,10 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.retranslateUi(MainWindow)
 
-        # When add assignment buttons is pressed, print table
+        # When add assignment buttons is pressed, add a row on table for an assignmet
         self.Add_Asm_Button.clicked.connect(self.add_row_to_table)
-        self.calc_grade_button.clicked.connect(self.print_table)
+        # When add calculate grade button is pressed, create assignmets and
+        self.calc_grade_button.clicked.connect(self.grade_assignmets)
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -140,7 +141,39 @@ class Ui_MainWindow(object):
         self.tableWidget.clearFocus()
         self.scrollArea.viewport().clearFocus()
         self.tableWidget.setFocus()
-        
+
+    """
+    This fuction creates weighted assignmets object based on GUI inputs and grades the assignmets 
+    """
+
+    def grade_assignmets(self):
+        self.print_table()
+        # final list assignmet
+        assignmets = []
+        # loop and make assignmet objects
+        self.deselect_table()
+        rows = self.tableWidget.rowCount()
+        cols = self.tableWidget.columnCount()
+        for row in range(rows):
+            # list for holding, name, weight, points earned, and posssible points
+            an_asm_data = []
+            for col in range(cols):
+                not_empty_item = self.get_item_at(row, col)
+                if not_empty_item:
+                    an_asm_data.append(not_empty_item.text())
+            name = an_asm_data[0]
+            weight = an_asm_data[1]
+            points_earned = an_asm_data[2]
+            possible_possible = an_asm_data[3]
+            # create an assignmet object
+            an_asm = self.make_assignmet(name, weight, points_earned, possible_possible)
+            # add assignemt to list of assignmet
+            assignmets.append(an_asm)
+
+    def make_assignmet(name, weight, points_earned, possible_possible):
+        pass
+
+
 if __name__ == "__main__":
     import sys
 
