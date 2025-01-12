@@ -24,6 +24,12 @@ window()
 """
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from typing import List
+from weighted_assignment import weighted_assignment
+from Points_assignment import points_assignment
+
+
+list_of_asm = []
 
 
 class Ui_MainWindow(object):
@@ -39,7 +45,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.splitter = QtWidgets.QSplitter(self.centralwidget)
-        self.splitter.setGeometry(QtCore.QRect(290, 90, 471, 331))  #adjust size of the table
+        self.splitter.setGeometry(QtCore.QRect(290, 90, 471, 335))  #adjust size of the table
         self.splitter.setOrientation(QtCore.Qt.Vertical)
         self.splitter.setObjectName("splitter")
         self.GradCalcLabel = QtWidgets.QLabel(self.splitter)    
@@ -133,11 +139,15 @@ class Ui_MainWindow(object):
 
         self.addColumn.clicked.connect(self.added_column)
         self.delete_row.clicked.connect(self.deleted_row)
+        
+        
 
 
 
+        self.pushButton_2.clicked.connect(self.calculate_overall_grade)
 
-        #self.tableWidget.cellClicked.connect(self.get_row)
+
+        #self.tableWidget.cellChanged.connect(self.get_row)
       
         
 
@@ -177,14 +187,17 @@ class Ui_MainWindow(object):
         cell_content = self.tableWidget.item(row,column)
         
         if cell_content:
-            print(f"Content on cell: {cell_content.text()}")
+            #print(f"Content on cell: {cell_content.text()}")
+            print(f"({row}, {column}) is currently selected")
 
 
-    
+    """
     def cell_access(self):
-        cell_content = self.tableWidget.item(2,2)
+        cell_content = self.tableWidget.itemAt(self.tableWidget.rowCount() - 1,)
         if cell_content:
-            print(f"Content on cell: {cell_content.text()}")
+            print(cell_content.text())
+    """
+
 
     def added_column(self):
         rowPosition = self.tableWidget.rowCount()
@@ -193,6 +206,23 @@ class Ui_MainWindow(object):
     def deleted_row(self):
         rowPosition = self.tableWidget.rowCount() - 1
         self.tableWidget.removeRow(rowPosition)
+
+    def calculate_overall_grade(self):
+        points_earned = 0
+        points_total = 0
+        for x in range(self.tableWidget.rowCount()):
+            cell_content_earned = self.tableWidget.item(x,1)
+            cell_content_total = self.tableWidget.item(x,2)
+
+            points_earned = points_earned + int(cell_content_earned.text())
+            points_total = points_total + int(cell_content_total.text())
+        
+        overall = (points_earned / points_total) * 100
+
+        print(f"Overall Grade: {overall: .2f}%")
+            
+
+        
         
 
 
@@ -214,11 +244,60 @@ class Ui_MainWindow(object):
 
 
 if __name__ == "__main__":
+
+    def calc_weighted_grade(list_of_weighted_asms: List[weighted_assignment]):
+        score = 0
+        for asm in list_of_weighted_asms:
+            score += asm.calc_weight_grade()
+        return score
+    
+    def calc_points_grade(list_of_points_asms: List[points_assignment]):
+        score = 0
+        tot_points_earned = 0
+        tot_points_total = 0
+        for asm in list_of_points_asms:
+            tot_points_earned += asm.get_points_earned()
+            tot_points_total += asm.get_points_total()
+
+        score = (tot_points_earned / tot_points_total) * 100
+        return score
+    
+    def add_assignment_points(list_of_asm: List, name, points_earned, points_total):  # Man
+        asm = points_assignment(name, points_earned, points_total)
+        list_of_asm.append(asm)
+        print("Added Successfully")
+        return True
+    
+    def remove_assignment(list_of_asm: List, name):  # Man
+        for asm in list_of_asm:
+            if(asm.get_name() == name):
+                list_of_asm.remove(asm)
+                return True
+        print("Assignment not found.")
+        return False
+    
+    def overall_grade_assignment(list_of_asm: List, asm_type):  # Man
+        if (asm_type == 'W'):
+            print(f"{calc_weighted_grade(list_of_asm): .2f}%")
+            return True
+        elif (asm_type == 'P'):
+            print(f"{calc_points_grade(list_of_asm): .2f}%")
+            return True
+        else:
+            return False
+    
     import sys
+    asm_type = input("W or P\n")
+
+    
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+
+    #stylesheet = "QWidget {background-color: qlineargradient(x1: 0, x2: 1, stop: 0 lightgray, stop: 1 lightgray)}"
+    MainWindow.setStyleSheet("background-color: lightgray;")
+    
         
     MainWindow.show()       
     sys.exit(app.exec_()) 
